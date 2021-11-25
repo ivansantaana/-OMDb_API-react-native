@@ -1,5 +1,5 @@
 import React , { useState } from 'react';
-import { StyleSheet, View, Text } from 'react-native';
+import { StyleSheet, View, Text, TextInput, TouchableOpacity } from 'react-native';
 
 const App = () => {
   const [value, onChangeText] = useState('');
@@ -7,14 +7,30 @@ const App = () => {
   const [searchResult, setSearchResult] = useState({});
   const [isLoading, setLoadingVisible] = useState(false);
 
+  const onPress = () => {
+    setModalVisible(true);
+    setLoadingVisible(true);
+    }
+
   return (
     <View style={styles.container}>
       <Text style={styles.title}> OMDb API </Text>
         <Text>The Open Movie Database</Text>
-    </View>
+        <TextInput
+          style={styles.input}
+          onChangeText={text => onChangeText(text)}
+          value={value}
+        />
+        <TouchableOpacity
+          style={styles.button}
+          onPress={onPress}
+        ><Text>Search</Text>
+        </TouchableOpacity>
+    </View> 
   );
 };
 export default App;
+
 
 const styles = StyleSheet.create({
   container: {
@@ -27,5 +43,20 @@ const styles = StyleSheet.create({
     marginVertical: 8,
     fontSize: 48,
     fontWeight: "bold"
-  }
+  },
+  input: {
+    height: 40,
+    borderColor: 'gray',
+    borderWidth: 1,
+    alignSelf: 'stretch',
+    margin: 10,
+    padding: 10
+  },
+  button: {
+    alignItems: "center",
+    backgroundColor: "#4CB53D",
+    margin: 10,
+    padding: 10,
+    alignSelf: 'stretch'
+    }
 });
