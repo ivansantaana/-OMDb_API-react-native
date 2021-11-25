@@ -10,7 +10,21 @@ const App = () => {
   const onPress = () => {
     setModalVisible(true);
     setLoadingVisible(true);
-    }
+    getMoviesFromApiAsync();
+  }
+
+  async function getMoviesFromApiAsync() {
+    try {
+      let response = await fetch('http://www.omdbapi.com/?apikey=3745c793&t=' + value);
+      
+      let json = await response.json();
+      setSearchResult(json);
+      setLoadingVisible(false);
+        console.log(json)
+    } catch (error) {
+        console.error(error);
+      }
+  }
 
   return (
     <View style={styles.container}>
